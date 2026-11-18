@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Technology · Q-MIZAN</title>
+<meta name="description" content="How quantum gravimeters use falling ultracold atoms to weigh the carbon locked in Fujairah's rocks.">
+<meta property="og:title" content="Technology · Q-MIZAN">
+<meta property="og:description" content="How quantum gravimeters use falling ultracold atoms to weigh the carbon locked in Fujairah's rocks.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>Q-MIZAN</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu"><li><a href="challenge.html">Challenge</a></li><li><a href="technology.html" aria-current="page">Technology</a></li><li><a href="lab.html">Simulation Lab</a></li><li><a href="impact.html">Impact</a></li><li><a href="research.html">Research</a></li><li><a href="team.html">Team</a></li><li><a class="cta" href="assets/docs/Q-MIZAN_Proposal.pptx">Proposal</a></li></ul>
+  </div>
+</nav>
+<main id="main">
+
+<header class="pagehead"><div class="wrap">
+  <div class="eyebrow">02 · The technology</div>
+  <h1>Weighing carbon with falling atoms</h1>
+  <p class="lead">Every tonne of CO2 that becomes rock adds mass underground, and extra mass pulls a little harder. A quantum gravimeter can feel that tiny change.</p>
+</div></header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Inside the sensor</div>
+    <h2>How an atom interferometer works</h2>
+    <div class="ai" style="margin-top:20px">
+      <canvas id="aiCanvas" aria-label="Animated diagram of an atom interferometer: atoms are cooled, split into two paths, fall, recombine and are detected"></canvas>
+      <div>
+        <div class="stepper" id="aiSteps" role="group" aria-label="Steps"></div>
+        <div class="explain" id="aiExplain" aria-live="polite"></div>
+        <button type="button" class="btn" id="aiNext">Next step →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap grid-2">
+    <div class="read">
+      <div class="eyebrow">The physics</div>
+      <h2>Why mass changes gravity</h2>
+      <p>Everything with mass pulls on everything else. A mountain pulls on you very slightly, and so does the carbon being added to the rock beneath it. For a compact lump of mass <em>M</em> at a distance <em>r</em>, the extra pull is:</p>
+      <div class="formula">Δg = G × M ÷ r²</div>
+      <p style="margin-top:16px">G is the gravitational constant (6.674 × 10⁻¹¹). Gravity on Earth is about 9.8 m/s², or 980 million µGal. One year of injection at one Fujairah borehole, 25,000 tonnes of CO2, would add about <strong>17 µGal</strong> at a sensor 100 m away: less than two hundred-millionths of normal gravity.</p>
+      <p class="muted">Field quantum gravimeters today can resolve about 5 µGal per measurement, so that signal is around three times their limit.</p>
+    </div>
+    <figure class="figure"><img src="assets/img/diagram.svg" alt="Labelled diagram: inside the sensor, atoms are cooled, split, fall and interfere; at the injection site, a borehole sensor under the carbonate zone sees gravity rise and then flatten"></figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Our system</div>
+    <h2>The Q-MIZAN network</h2>
+    <figure class="figure" style="margin-top:20px"><img src="assets/img/system.svg" alt="System diagram: surface stations and a borehole sensor send quantum-safe signed data to a carbon ledger, which produces proof and alerts"></figure>
+    <div class="grid-3" style="margin-top:20px">
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg></div><div class="k">Technology 1 · sensing</div><h3>Atom-interferometry gravimeter</h3><p>Laser-cooled rubidium atoms in superposition give absolute gravity readings that do not drift. Used at solar-powered surface stations running 24/7.</p></div>
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><path d="M3 7h18M12 3v14"/><path d="M8 21c0-2 2-4 4-4s4 2 4 4"/><path d="M5 7l2 4M19 7l-2 4"/></svg></div><div class="k">Technology 2 · sensing</div><h3>Slim borehole quantum sensor</h3><p>Gravity fades with distance squared, so a sensor in a curved borehole beneath the carbon sees far more than one on a mountain top. Shrinking the sensor to fit is our main design challenge.</p></div>
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><div class="k">Technology 3 · communication</div><h3>Quantum-safe data</h3><p>Readings are signed with post-quantum (quantum-safe) codes, so they cannot be faked even by future quantum computers. Quantum key distribution (QKD) is a future upgrade.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap grid-2 top">
+    <div>
+      <div class="eyebrow">Reading the signal</div>
+      <h2>Rise, then flat</h2>
+      <p class="read">While CO2 is being injected, gravity at the borehole sensor rises month by month. When injection stops, gravity should stay level: the carbon has stopped moving. If gravity starts to fall, some of the mass is moving away, and the team checks the monitoring wells.</p>
+      <p class="read muted">Gravity tells us where the mass is and whether it moves. Water chemistry from the wells confirms it has become carbonate. Used together, they give a complete answer.</p>
+      <a class="btn primary" href="lab.html#monitor">See it in the simulation</a>
+    </div>
+    <div>
+      <div class="eyebrow">Say it accurately</div>
+      <div class="myth">
+        <div class="h">Instead of</div><div class="h">We say</div>
+        <div class="x">A qubit is 0 and 1 at the same time</div><div class="ok">An atom can be in a superposition, and gives one result when measured</div>
+        <div class="x">Quantum sensors are magic</div><div class="ok">They are precise because atoms are identical and do not wear out or drift</div>
+        <div class="x">Unhackable data</div><div class="ok">Quantum-safe codes resist attacks by quantum computers; QKD reveals eavesdropping</div>
+        <div class="x">Gravity sees the carbon turn to rock</div><div class="ok">Gravity sees mass arrive and stay; chemistry confirms the rock</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap next-page"><a class="btn" href="lab.html">Next: simulation lab →</a></div>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:10px"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>Q-MIZAN</a>
+      <p>Quantum sensors that weigh the CO2 being turned into rock in Fujairah’s mountains. A proposal for the ATRC School Program Quantum Challenge 2026–27.</p>
+      <p>ATS Abu Dhabi Boys · Teacher: Nidal Saleh</p>
+    </div>
+    <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="challenge.html">Challenge</a></li><li><a href="technology.html">Technology</a></li><li><a href="lab.html">Simulation Lab</a></li><li><a href="impact.html">Impact</a></li><li><a href="research.html">Research</a></li><li><a href="team.html">Team</a></li></ul></div>
+    <div><h4>Links</h4><ul>
+      <li><a href="assets/docs/Q-MIZAN_Proposal.pptx">Download our proposal (.pptx)</a></li>
+      <li><a href="https://atrcschoolprogram.ae">ATRC School Program</a></li>
+      <li><a href="https://www.tii.ae/quantum">TII Quantum Research Center</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>

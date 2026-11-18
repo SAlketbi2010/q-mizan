@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulation Lab · Q-MIZAN</title>
+<meta name="description" content="Interactive simulations: could a quantum gravimeter detect the carbon stored in Fujairah?">
+<meta property="og:title" content="Simulation Lab · Q-MIZAN">
+<meta property="og:description" content="Interactive simulations: could a quantum gravimeter detect the carbon stored in Fujairah?">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>Q-MIZAN</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul id="menu"><li><a href="challenge.html">Challenge</a></li><li><a href="technology.html">Technology</a></li><li><a href="lab.html" aria-current="page">Simulation Lab</a></li><li><a href="impact.html">Impact</a></li><li><a href="research.html">Research</a></li><li><a href="team.html">Team</a></li><li><a class="cta" href="assets/docs/Q-MIZAN_Proposal.pptx">Proposal</a></li></ul>
+  </div>
+</nav>
+<main id="main">
+
+<header class="pagehead"><div class="wrap">
+  <div class="eyebrow">03 · Simulation lab</div>
+  <h1>Could a quantum sensor see it?</h1>
+  <p class="lead">Three models built from the real Fujairah numbers. Move the sliders and see when the carbon becomes detectable.</p>
+  <div class="tabs"><a href="#calculator">A · Signal calculator</a><a href="#monitor">B · Month-by-month monitoring</a><a href="#map">C · Sensor network map</a><a href="#model">How the models work</a></div>
+</div></header>
+
+<section id="calculator">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>A · Signal calculator</h3><span class="muted">How much extra gravity does stored carbon make?</span></div>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="mass">CO2 stored <span id="massOut"></span></label><input id="mass" type="range" min="1" max="6" step="0.01" value="4.398"></div>
+          <div><label for="dist">Distance to sensor <span id="distOut"></span></label><input id="dist" type="range" min="20" max="800" step="5" value="100"></div>
+          <div><label for="lim">Sensor limit <span id="limOut"></span></label><input id="lim" type="range" min="1" max="20" step="0.5" value="5"><div class="hint">Field quantum gravimeters today: about 5 µGal</div></div>
+          <div class="seg" id="presetsA" role="group" aria-label="Presets">
+            <button type="button" data-m="10" aria-pressed="false">10 t pilot</button>
+            <button type="button" data-m="300" aria-pressed="false">300 t</button>
+            <button type="button" data-m="25000" aria-pressed="true">1 year</button>
+            <button type="button" data-m="250000" aria-pressed="false">10 years</button>
+          </div>
+        </div>
+        <div>
+          <div class="readout"><div class="val num" id="dgOut">–</div><div id="verdictA"></div></div>
+          <canvas id="chartA" aria-label="Gravity signal against distance, with the sensor limit"></canvas>
+          <div class="legend"><span><i style="background:var(--teal)"></i>signal from the stored carbon</span><span><i style="background:var(--warn)"></i>sensor limit</span><span><i class="dot" style="background:var(--violet)"></i>your sensor</span></div>
+          <p class="note" id="reachA"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="monitor" class="alt">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>B · Month-by-month monitoring</h3><span class="muted">Three years of readings from the borehole sensor</span></div>
+      <p class="note" style="margin-top:4px">Injection runs for the first year, then stops. Each dot is one month’s averaged reading, with random noise like a real instrument.</p>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="rate">Injection rate <span id="rateOut"></span></label><input id="rate" type="range" min="1" max="70" step="1" value="20"><div class="hint">44.01’s upgraded system: up to 20 t/day</div></div>
+          <div><label for="distB">Sensor below the carbon <span id="distBOut"></span></label><input id="distB" type="range" min="30" max="400" step="10" value="60"></div>
+          <div><label for="noise">Monthly noise <span id="noiseOut"></span></label><input id="noise" type="range" min="0.5" max="8" step="0.5" value="2"></div>
+          <div class="seg" role="group" aria-label="What happens after injection">
+            <button type="button" id="scStay" aria-pressed="true">Stays put</button>
+            <button type="button" id="scLeak" aria-pressed="false">Some moves away</button>
+          </div>
+          <button type="button" class="btn" id="reroll">Take new measurements</button>
+        </div>
+        <div>
+          <div class="readout"><div id="verdictB"></div></div>
+          <canvas id="chartB" aria-label="Simulated monthly gravity readings over three years"></canvas>
+          <div class="legend"><span><i style="background:var(--teal)"></i>true signal</span><span><i class="dot" style="background:var(--sand)"></i>monthly reading</span><span><i style="background:var(--muted)"></i>injection stops</span></div>
+          <p class="note" id="noteB"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>C · Sensor network map</h3><span class="muted">A 1.2 km × 1.2 km site seen from above</span></div>
+      <p class="note" style="margin-top:4px">One borehole injects 25,000 t a year for five years, then stops. The carbon spreads through cracks over time. Sensors sit on a level a set distance above the carbon. The dashed yellow line marks where the signal passes the sensor limit.</p>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="years">Time since start <span id="yearsOut"></span></label><input id="years" type="range" min="1" max="15" step="1" value="5"></div>
+          <div><label for="depth">Sensors above the carbon <span id="depthOut"></span></label><input id="depth" type="range" min="50" max="600" step="10" value="150"></div>
+          <div><label for="limC">Sensor limit <span id="limCOut"></span></label><input id="limC" type="range" min="1" max="20" step="0.5" value="5"></div>
+          <div class="seg" role="group" aria-label="What happens after injection">
+            <button type="button" id="dStay" aria-pressed="true">Stays put</button>
+            <button type="button" id="dDrift" aria-pressed="false">Drifts east</button>
+          </div>
+          <button type="button" class="btn" id="resetSensors">Reset sensors</button>
+          <div class="hint">Click the map to add a sensor; click a sensor to remove it.</div>
+        </div>
+        <div>
+          <div class="readout"><div id="verdictC"></div></div>
+          <canvas id="chartC" class="tall" aria-label="Map of the gravity signal over the site, with sensor positions"></canvas>
+          <div class="legend"><span><i style="background:linear-gradient(90deg,#16232E,#1B5C82,#7EDDD3,#F2F5F7);width:60px;height:8px"></i>weak → strong signal</span><span><i class="dot" style="background:var(--violet)"></i>sensor that sees it</span><span><i style="background:var(--warn)"></i>sensor limit</span><span><i class="dot" style="background:var(--ink)"></i>injection well</span></div>
+          <p class="note" id="noteC"></p>
+          <div class="tablewrap" style="margin-top:12px"><table style="min-width:420px"><thead><tr><th>Sensor</th><th>Position (m east, m north)</th><th style="text-transform:none;letter-spacing:.04em">SIGNAL (µGal)</th><th>Status</th></tr></thead><tbody id="sensorRows"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="alt">
+  <div class="wrap grid-2 top">
+    <div class="read">
+      <div class="eyebrow">How the models work</div>
+      <h2>Simple physics, honest limits</h2>
+      <p>Models A and B treat the stored carbon as one compact mass directly above or below the sensor, so the extra pull is <span class="mono">Δg = G·M / r²</span>.</p>
+      <p>Model C spreads the carbon over 400 small masses in a growing cloud and adds up the vertical pull of each one at every point on the map, using <span class="mono">Δg = G·m·z / (ρ² + z²)^1.5</span>, where ρ is the sideways distance and z the vertical distance.</p>
+      <p>We count only the CO2 itself as added mass: we assume the injected seawater mostly pushes out water already in the rock.</p>
+    </div>
+    <div class="callout">
+      <div class="k">What the models leave out</div>
+      <p>Real carbon spreads through cracks in shapes we cannot predict exactly. A real sensor must also be corrected for rain, Earth tides, temperature, air pressure and the mountains themselves. Because of this, our numbers are a first estimate to show the idea is plausible, not a design.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:10px"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>Q-MIZAN</a>
+      <p>Quantum sensors that weigh the CO2 being turned into rock in Fujairah’s mountains. A proposal for the ATRC School Program Quantum Challenge 2026–27.</p>
+      <p>ATS Abu Dhabi Boys · Teacher: Nidal Saleh</p>
+    </div>
+    <div><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="challenge.html">Challenge</a></li><li><a href="technology.html">Technology</a></li><li><a href="lab.html">Simulation Lab</a></li><li><a href="impact.html">Impact</a></li><li><a href="research.html">Research</a></li><li><a href="team.html">Team</a></li></ul></div>
+    <div><h4>Links</h4><ul>
+      <li><a href="assets/docs/Q-MIZAN_Proposal.pptx">Download our proposal (.pptx)</a></li>
+      <li><a href="https://atrcschoolprogram.ae">ATRC School Program</a></li>
+      <li><a href="https://www.tii.ae/quantum">TII Quantum Research Center</a></li>
+    </ul></div>
+  </div>
+</footer>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/lab.js"></script>
+</body>
+</html>
