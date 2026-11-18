@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1364" height="990" viewBox="0 0 1364 990" font-family="Tahoma, Arial, 'Segoe UI', 'DejaVu Sans', sans-serif">
+<defs>
+ <linearGradient id="rock" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6B4A35"/><stop offset="1" stop-color="#3B2E26"/></linearGradient>
+ <linearGradient id="peri" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3E4A3A"/><stop offset="1" stop-color="#252C24"/></linearGradient>
+ <radialGradient id="glow"><stop offset="0" stop-color="#C7ABFF"/><stop offset="0.5" stop-color="#8F5BFF"/><stop offset="1" stop-color="#6400FF" stop-opacity="0"/></radialGradient>
+ <radialGradient id="carb"><stop offset="0" stop-color="#F2F5F7" stop-opacity="0.9"/><stop offset="0.7" stop-color="#C9D3DA" stop-opacity="0.45"/><stop offset="1" stop-color="#C9D3DA" stop-opacity="0"/></radialGradient>
+ <clipPath id="c"><rect x="0" y="0" width="1364" height="990" rx="18"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+ <circle cx="1180" cy="120" r="60" fill="#D9B77E" opacity="0.25"/><circle cx="1180" cy="120" r="36" fill="#D9B77E" opacity="0.6"/>
+ <!-- mountains -->
+ <path d="M0 400 L120 260 L210 330 L330 170 L450 300 L560 220 L700 360 L820 230 L930 310 L1040 200 L1160 330 L1260 270 L1364 340 L1364 990 L0 990Z" fill="url(#rock)"/>
+ <path d="M330 170 L380 230 L350 225 L330 260 L300 210Z M1040 200 L1090 260 L1055 250 L1030 280 L1010 240Z" fill="#8A6248" opacity="0.7"/>
+ <!-- peridotite body -->
+ <path d="M0 560 C 300 540, 900 580, 1364 550 L1364 990 L0 990Z" fill="url(#peri)"/>
+ <text x="1320" y="620" font-size="26" font-weight="bold" fill="#C9D3DA" text-anchor="start" direction="rtl" unicode-bidi="embed">البيريدوتيت</text>
+ <!-- cement / capture plant -->
+ <g transform="translate(70,300)">
+  <rect x="0" y="40" width="130" height="80" fill="#C9D3DA"/><rect x="20" y="-30" width="24" height="70" fill="#9FB0BD"/><rect x="60" y="-10" width="24" height="50" fill="#9FB0BD"/>
+  <circle cx="32" cy="-48" r="16" fill="#9FB0BD" opacity="0.5"/><circle cx="46" cy="-72" r="20" fill="#9FB0BD" opacity="0.3"/>
+ </g>
+ <text x="40" y="455" font-size="21" fill="#F2F5F7" text-anchor="end" direction="rtl" unicode-bidi="embed">التقاط CO2</text>
+ <!-- pipe and injection well -->
+ <path d="M200 390 L 470 390" stroke="#7EDDD3" stroke-width="8"/>
+ <line x1="470" y1="300" x2="470" y2="780" stroke="#F2F5F7" stroke-width="10"/>
+ <rect x="445" y="280" width="50" height="30" fill="#F2F5F7"/>
+ <text x="505" y="345" font-size="21" fill="#7EDDD3" text-anchor="end" direction="rtl" unicode-bidi="embed">حقن CO2 مع ماء البحر</text>
+ <!-- carbonate zone -->
+ <ellipse cx="470" cy="790" rx="230" ry="110" fill="url(#carb)"/>
+ <g stroke="#FFFFFF" stroke-width="3" opacity="0.8" fill="none">
+  <path d="M330 760 l40 20 l30 -15 l40 25"/><path d="M500 820 l40 -18 l35 22 l40 -10"/><path d="M380 840 l50 -10 l30 20"/><path d="M520 740 l30 25 l50 -5"/>
+ </g>
+ <text x="60" y="668" font-size="24" font-weight="bold" fill="#F2F5F7" text-anchor="end" direction="rtl" unicode-bidi="embed">CO2 يتحوّل إلى صخر</text>
+ <!-- quantum station on surface -->
+ <g transform="translate(760,240)">
+  <polygon points="-10,40 120,10 128,30 0,60" fill="#3FA7D6"/>
+  <rect x="50" y="45" width="10" height="60" fill="#C9D3DA"/>
+  <rect x="10" y="95" width="100" height="70" rx="8" fill="#F2F5F7"/>
+  <rect x="48" y="60" width="22" height="45" rx="6" fill="#6400FF"/>
+  <circle cx="59" cy="58" r="28" fill="url(#glow)"/>
+ </g>
+ <text x="820" y="225" font-size="21" fill="#F2F5F7" text-anchor="middle" direction="rtl" unicode-bidi="embed">محطة كمّية</text>
+ <g stroke="#B18CFF" stroke-width="4" fill="none" stroke-dasharray="4 12" stroke-linecap="round">
+  <path d="M600 760 L800 420"/><path d="M640 790 L820 420"/>
+ </g>
+ <!-- borehole sensor (deviated well under the carbon) -->
+ <path d="M1000 330 C 1000 700, 820 905, 600 920" fill="none" stroke="#C9D3DA" stroke-width="6"/>
+ <rect x="500" y="905" width="90" height="30" rx="13" fill="#6400FF"/>
+ <circle cx="545" cy="920" r="30" fill="url(#glow)"/>
+ <path d="M520 860 L520 895" stroke="#B18CFF" stroke-width="4" stroke-dasharray="4 8"/>
+ <text x="640" y="965" font-size="21" fill="#F2F5F7" text-anchor="end" direction="rtl" unicode-bidi="embed">مستشعر في بئر أسفل الكربون</text>
+ <text x="740" y="560" font-size="40" font-weight="bold" fill="#B18CFF" text-anchor="end" direction="rtl" unicode-bidi="embed">Δg</text>
+</g>
+</svg>

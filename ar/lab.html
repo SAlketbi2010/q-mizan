@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مختبر المحاكاة · كيو-ميزان</title>
+<meta name="description" content="محاكاة تفاعلية: هل يستطيع مقياس جاذبية كمّي رصد الكربون المخزَّن في الفجيرة؟">
+<meta property="og:title" content="مختبر المحاكاة · كيو-ميزان">
+<meta property="og:description" content="محاكاة تفاعلية: هل يستطيع مقياس جاذبية كمّي رصد الكربون المخزَّن في الفجيرة؟">
+<link rel="alternate" hreflang="en" href="../lab.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<nav class="nav" aria-label="الرئيسية">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>كيو-ميزان</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">القائمة</button>
+    <ul id="menu"><li><a href="challenge.html">التحدي</a></li><li><a href="technology.html">التقنية</a></li><li><a href="lab.html" aria-current="page">مختبر المحاكاة</a></li><li><a href="impact.html">الأثر</a></li><li><a href="research.html">الأبحاث</a></li><li><a href="team.html">الفريق</a></li><li><a class="lang" href="../lab.html" lang="en" hreflang="en">English</a></li><li><a class="cta" href="../assets/docs/Q-MIZAN_Proposal.pptx">المقترح</a></li></ul>
+  </div>
+</nav>
+<main id="main">
+
+<header class="pagehead"><div class="wrap">
+  <div class="eyebrow">03 · مختبر المحاكاة</div>
+  <h1>هل يستطيع مستشعر كمّي رؤيته؟</h1>
+  <p class="lead">ثلاثة نماذج مبنية على أرقام الفجيرة الحقيقية. حرّك المؤشرات لترى متى يصبح الكربون قابلاً للرصد.</p>
+  <div class="tabs"><a href="#calculator">أ · حاسبة الإشارة</a><a href="#monitor">ب · المراقبة الشهرية</a><a href="#map">ج · خريطة شبكة المستشعرات</a><a href="#model">كيف تعمل النماذج</a></div>
+</div></header>
+
+<section id="calculator">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>أ · حاسبة الإشارة</h3><span class="muted">كم تزيد الجاذبية بسبب الكربون المخزَّن؟</span></div>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="mass">ثاني أكسيد الكربون المخزَّن <span id="massOut"></span></label><input id="mass" type="range" min="1" max="6" step="0.01" value="4.398"></div>
+          <div><label for="dist">المسافة إلى المستشعر <span id="distOut"></span></label><input id="dist" type="range" min="20" max="800" step="5" value="100"></div>
+          <div><label for="lim">حدّ المستشعر <span id="limOut"></span></label><input id="lim" type="range" min="1" max="20" step="0.5" value="5"><div class="hint">مقاييس الجاذبية الكمّية الميدانية اليوم: نحو 5 ميكروغال</div></div>
+          <div class="seg" id="presetsA" role="group" aria-label="قيم جاهزة">
+            <button type="button" data-m="10" aria-pressed="false">تجربة 10 أطنان</button>
+            <button type="button" data-m="300" aria-pressed="false">300 طن</button>
+            <button type="button" data-m="25000" aria-pressed="true">سنة واحدة</button>
+            <button type="button" data-m="250000" aria-pressed="false">10 سنوات</button>
+          </div>
+        </div>
+        <div>
+          <div class="readout"><div class="val num" id="dgOut">–</div><div id="verdictA"></div></div>
+          <canvas id="chartA" aria-label="إشارة الجاذبية مقابل المسافة، مع حدّ المستشعر"></canvas>
+          <div class="legend"><span><i style="background:var(--teal)"></i>إشارة الكربون المخزَّن</span><span><i style="background:var(--warn)"></i>حدّ المستشعر</span><span><i class="dot" style="background:var(--violet)"></i>مستشعرك</span></div>
+          <p class="note" id="reachA"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="monitor" class="alt">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>ب · المراقبة شهراً بعد شهر</h3><span class="muted">ثلاث سنوات من قراءات مستشعر البئر</span></div>
+      <p class="note" style="margin-top:4px">يستمر الحقن في السنة الأولى ثم يتوقف. كل نقطة هي متوسط قراءات شهر واحد، مع ضجيج عشوائي كما في جهاز حقيقي.</p>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="rate">معدّل الحقن <span id="rateOut"></span></label><input id="rate" type="range" min="1" max="70" step="1" value="20"><div class="hint">نظام 44.01 المطوَّر: حتى 20 طن/يوم</div></div>
+          <div><label for="distB">المستشعر أسفل الكربون بمسافة <span id="distBOut"></span></label><input id="distB" type="range" min="30" max="400" step="10" value="60"></div>
+          <div><label for="noise">الضجيج الشهري <span id="noiseOut"></span></label><input id="noise" type="range" min="0.5" max="8" step="0.5" value="2"></div>
+          <div class="seg" role="group" aria-label="ماذا يحدث بعد الحقن">
+            <button type="button" id="scStay" aria-pressed="true">يبقى في مكانه</button>
+            <button type="button" id="scLeak" aria-pressed="false">جزء منه يتحرّك</button>
+          </div>
+          <button type="button" class="btn" id="reroll">خذ قياسات جديدة</button>
+        </div>
+        <div>
+          <div class="readout"><div id="verdictB"></div></div>
+          <canvas id="chartB" aria-label="قراءات جاذبية شهرية محاكاة على مدى ثلاث سنوات"></canvas>
+          <div class="legend"><span><i style="background:var(--teal)"></i>الإشارة الحقيقية</span><span><i class="dot" style="background:var(--sand)"></i>قراءة شهرية</span><span><i style="background:var(--muted)"></i>توقّف الحقن</span></div>
+          <p class="note" id="noteB"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="map">
+  <div class="wrap">
+    <div class="sim">
+      <div class="sim-head"><h3>ج · خريطة شبكة المستشعرات</h3><span class="muted">موقع مساحته 1.2 كم × 1.2 كم من الأعلى</span></div>
+      <p class="note" style="margin-top:4px">تحقن بئر واحدة 25,000 طن سنوياً لمدة خمس سنوات ثم تتوقف. وينتشر الكربون عبر الشقوق مع الزمن. وتقع المستشعرات على مستوى يبعد مسافة محددة فوق الكربون. ويحدّد الخط الأصفر المتقطع المنطقة التي تتجاوز فيها الإشارة حدّ المستشعر.</p>
+      <div class="simgrid">
+        <div class="ctl">
+          <div><label for="years">الزمن منذ البداية <span id="yearsOut"></span></label><input id="years" type="range" min="1" max="15" step="1" value="5"></div>
+          <div><label for="depth">المستشعرات فوق الكربون بمسافة <span id="depthOut"></span></label><input id="depth" type="range" min="50" max="600" step="10" value="150"></div>
+          <div><label for="limC">حدّ المستشعر <span id="limCOut"></span></label><input id="limC" type="range" min="1" max="20" step="0.5" value="5"></div>
+          <div class="seg" role="group" aria-label="ماذا يحدث بعد الحقن">
+            <button type="button" id="dStay" aria-pressed="true">يبقى في مكانه</button>
+            <button type="button" id="dDrift" aria-pressed="false">ينجرف شرقاً</button>
+          </div>
+          <button type="button" class="btn" id="resetSensors">إعادة المستشعرات</button>
+          <div class="hint">انقر على الخريطة لإضافة مستشعر، وانقر على مستشعر لإزالته.</div>
+        </div>
+        <div>
+          <div class="readout"><div id="verdictC"></div></div>
+          <canvas id="chartC" class="tall" aria-label="خريطة إشارة الجاذبية فوق الموقع مع مواقع المستشعرات"></canvas>
+          <div class="legend"><span><i style="background:linear-gradient(90deg,#16232E,#1B5C82,#7EDDD3,#F2F5F7);width:60px;height:8px"></i>إشارة ضعيفة ← قوية</span><span><i class="dot" style="background:var(--violet)"></i>مستشعر يرصد الكربون</span><span><i style="background:var(--warn)"></i>حدّ المستشعر</span><span><i class="dot" style="background:var(--ink)"></i>بئر الحقن</span></div>
+          <p class="note" id="noteC"></p>
+          <div class="tablewrap" style="margin-top:12px"><table style="min-width:420px"><thead><tr><th>المستشعر</th><th>الموقع (م شرقاً، م شمالاً)</th><th>الإشارة (ميكروغال)</th><th>الحالة</th></tr></thead><tbody id="sensorRows"></tbody></table></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="model" class="alt">
+  <div class="wrap grid-2 top">
+    <div class="read">
+      <div class="eyebrow">كيف تعمل النماذج</div>
+      <h2>فيزياء بسيطة، وحدود واضحة</h2>
+      <p>يعامل النموذجان أ وب الكربون المخزَّن ككتلة واحدة متراصّة فوق المستشعر أو تحته مباشرة، فتكون الجاذبية الإضافية <span class="mono ltr">Δg = G·M / r²</span>.</p>
+      <p>أما النموذج ج فيوزّع الكربون على 400 كتلة صغيرة في سحابة تتّسع، ويجمع الجذب الرأسي لكل منها عند كل نقطة على الخريطة باستخدام <span class="mono ltr">Δg = G·m·z / (ρ² + z²)^1.5</span>، حيث ρ المسافة الأفقية وz المسافة الرأسية.</p>
+      <p>نحتسب ثاني أكسيد الكربون وحده ككتلة مضافة: إذ نفترض أن ماء البحر المحقون يدفع في الغالب الماء الموجود أصلاً في الصخر.</p>
+    </div>
+    <div class="callout">
+      <div class="k">ما لا تشمله النماذج</div>
+      <p>ينتشر الكربون الحقيقي عبر الشقوق بأشكال لا يمكن توقّعها بدقة. ويجب أيضاً تصحيح قراءات المستشعر الحقيقي من أثر الأمطار والمدّ الأرضي ودرجة الحرارة والضغط الجوي والجبال نفسها. لذلك أرقامنا تقدير أولي يبيّن أن الفكرة ممكنة، وليست تصميماً نهائياً.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:10px"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>كيو-ميزان</a>
+      <p>مستشعرات كمّية تزن ثاني أكسيد الكربون الذي يتحوّل إلى صخر في جبال الفجيرة. مقترح مقدَّم إلى تحدّي الكمّ ضمن برنامج المدارس لمجلس أبحاث التكنولوجيا المتطورة 2026–2027.</p>
+      <p>مدارس التكنولوجيا التطبيقية – أبوظبي بنين · المعلّم: نضال صالح</p>
+    </div>
+    <div><h4>استكشف</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="challenge.html">التحدي</a></li><li><a href="technology.html">التقنية</a></li><li><a href="lab.html">مختبر المحاكاة</a></li><li><a href="impact.html">الأثر</a></li><li><a href="research.html">الأبحاث</a></li><li><a href="team.html">الفريق</a></li></ul></div>
+    <div><h4>روابط</h4><ul><li><a href="../assets/docs/Q-MIZAN_Proposal.pptx">تحميل المقترح (‎.pptx، بالإنجليزية)</a></li><li><a href="https://atrcschoolprogram.ae">برنامج المدارس – مجلس أبحاث التكنولوجيا المتطورة</a></li><li><a href="https://www.tii.ae/quantum">مركز أبحاث الكمّ – معهد الابتكار التكنولوجي</a></li></ul></div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/lab.js"></script>
+</body>
+</html>

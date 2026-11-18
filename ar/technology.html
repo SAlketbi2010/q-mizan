@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>التقنية · كيو-ميزان</title>
+<meta name="description" content="كيف تستخدم مقاييس الجاذبية الكمّية ذرّات فائقة البرودة تسقط لوزن الكربون المحبوس في صخور الفجيرة.">
+<meta property="og:title" content="التقنية · كيو-ميزان">
+<meta property="og:description" content="كيف تستخدم مقاييس الجاذبية الكمّية ذرّات فائقة البرودة تسقط لوزن الكربون المحبوس في صخور الفجيرة.">
+<link rel="alternate" hreflang="en" href="../technology.html">
+<link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">انتقل إلى المحتوى</a>
+<nav class="nav" aria-label="الرئيسية">
+  <div class="wrap">
+    <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>كيو-ميزان</a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">القائمة</button>
+    <ul id="menu"><li><a href="challenge.html">التحدي</a></li><li><a href="technology.html" aria-current="page">التقنية</a></li><li><a href="lab.html">مختبر المحاكاة</a></li><li><a href="impact.html">الأثر</a></li><li><a href="research.html">الأبحاث</a></li><li><a href="team.html">الفريق</a></li><li><a class="lang" href="../technology.html" lang="en" hreflang="en">English</a></li><li><a class="cta" href="../assets/docs/Q-MIZAN_Proposal.pptx">المقترح</a></li></ul>
+  </div>
+</nav>
+<main id="main">
+
+<header class="pagehead"><div class="wrap">
+  <div class="eyebrow">02 · التقنية</div>
+  <h1>وزن الكربون بذرّات تسقط</h1>
+  <p class="lead">كل طن من ثاني أكسيد الكربون يتحوّل إلى صخر يضيف كتلة تحت الأرض، والكتلة الإضافية تجذب بقوة أكبر قليلاً. ومقياس الجاذبية الكمّي قادر على الإحساس بهذا التغيّر الضئيل.</p>
+</div></header>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">داخل المستشعر</div>
+    <h2>كيف يعمل مقياس التداخل الذرّي</h2>
+    <div class="ai" style="margin-top:20px">
+      <canvas id="aiCanvas" aria-label="رسم متحرك لمقياس التداخل الذرّي: تبريد الذرّات، وانقسامها إلى مسارين، وسقوطها، ثم إعادة دمجها وقراءتها"></canvas>
+      <div>
+        <div class="stepper" id="aiSteps" role="group" aria-label="الخطوات"></div>
+        <div class="explain" id="aiExplain" aria-live="polite"></div>
+        <button type="button" class="btn" id="aiNext">الخطوة التالية ←</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap grid-2">
+    <div class="read">
+      <div class="eyebrow">الفيزياء</div>
+      <h2>لماذا تغيّر الكتلة الجاذبية</h2>
+      <p>كل ما له كتلة يجذب كل ما سواه. الجبل يجذبك جذباً ضئيلاً جداً، وكذلك الكربون الذي يُضاف إلى الصخر تحته. ولكتلة متراصّة مقدارها <em>M</em> على مسافة <em>r</em>، تكون الجاذبية الإضافية:</p>
+      <div class="formula">Δg = G × M ÷ r²</div>
+      <p style="margin-top:16px">حيث G ثابت الجذب العام (‎6.674 × 10⁻¹¹). وتبلغ الجاذبية على الأرض نحو 9.8 م/ث²، أي نحو 980 مليون ميكروغال. وسنة واحدة من الحقن في بئر واحدة في الفجيرة، أي 25,000 طن من ثاني أكسيد الكربون، تضيف نحو <strong>17 ميكروغال</strong> عند مستشعر على بُعد 100 م: أي أقل من جزأين من مئة مليون من الجاذبية المعتادة.</p>
+      <p class="muted">تستطيع مقاييس الجاذبية الكمّية الميدانية اليوم تمييز نحو 5 ميكروغال في القياس الواحد، فهذه الإشارة تقارب ثلاثة أضعاف حدّها.</p>
+    </div>
+    <figure class="figure"><img src="../assets/img/ar/diagram.svg" alt="رسم توضيحي: داخل المستشعر تُبرَّد الذرّات وتنقسم وتسقط وتتداخل؛ وفي موقع الحقن يرى مستشعر البئر أسفل منطقة الكربونات الجاذبية ترتفع ثم تثبت"></figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow">نظامنا</div>
+    <h2>شبكة كيو-ميزان</h2>
+    <figure class="figure" style="margin-top:20px"><img src="../assets/img/ar/system.svg" alt="مخطط النظام: محطات سطحية ومستشعر بئر يرسلان بيانات موقّعة وآمنة كمّياً إلى سجلّ الكربون، الذي يصدر الإثبات والتنبيهات"></figure>
+    <div class="grid-3" style="margin-top:20px">
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg></div><div class="k">التقنية 1 · الاستشعار</div><h3>مقياس جاذبية بالتداخل الذرّي</h3><p>ذرّات روبيديوم مبرّدة بالليزر في حالة تراكب تعطي قراءات مطلقة للجاذبية لا تنحرف مع الزمن. يُستخدم في محطات سطحية تعمل بالطاقة الشمسية على مدار الساعة.</p></div>
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><path d="M3 7h18M12 3v14"/><path d="M8 21c0-2 2-4 4-4s4 2 4 4"/><path d="M5 7l2 4M19 7l-2 4"/></svg></div><div class="k">التقنية 2 · الاستشعار</div><h3>مستشعر كمّي نحيف للآبار</h3><p>تضعف الجاذبية مع مربع المسافة، لذلك يرى مستشعر في بئر منحنية أسفل الكربون أكثر بكثير مما يراه مستشعر على قمة الجبل. وتصغير المستشعر ليناسب البئر هو تحدّي التصميم الرئيسي لدينا.</p></div>
+      <div class="card"><div class="icon v"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><div class="k">التقنية 3 · الاتصالات</div><h3>بيانات آمنة كمّياً</h3><p>تُوقَّع القراءات برموز ما بعد الكمّ (الآمنة كمّياً)، فلا يمكن تزويرها حتى بحواسيب كمّية مستقبلية. وتوزيع المفاتيح الكمّي (QKD) ترقية مستقبلية.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap grid-2 top">
+    <div>
+      <div class="eyebrow">قراءة الإشارة</div>
+      <h2>ارتفاع، ثم ثبات</h2>
+      <p class="read">أثناء حقن ثاني أكسيد الكربون ترتفع الجاذبية عند مستشعر البئر شهراً بعد شهر. وعندما يتوقف الحقن يجب أن تبقى الجاذبية ثابتة: أي أن الكربون توقف عن الحركة. وإذا بدأت الجاذبية بالانخفاض، فهذا يعني أن جزءاً من الكتلة يتحرّك بعيداً، فيفحص الفريق آبار المراقبة.</p>
+      <p class="read muted">تخبرنا الجاذبية أين توجد الكتلة وهل تتحرّك، وتؤكد كيمياء الماء من الآبار أنها أصبحت كربونات. ومعاً يعطيان إجابة كاملة.</p>
+      <a class="btn primary" href="lab.html#monitor">شاهدها في المحاكاة</a>
+    </div>
+    <div>
+      <div class="eyebrow">قلها بدقة</div>
+      <div class="myth">
+        <div class="h">بدلاً من</div><div class="h">نقول</div>
+        <div class="x">الكيوبت يكون 0 و1 في الوقت نفسه</div><div class="ok">يمكن أن تكون الذرّة في حالة تراكب، وتعطي نتيجة واحدة عند قياسها</div>
+        <div class="x">المستشعرات الكمّية سحر</div><div class="ok">دقتها نابعة من أن الذرّات متطابقة ولا تبلى ولا تنحرف</div>
+        <div class="x">بيانات غير قابلة للاختراق</div><div class="ok">الرموز الآمنة كمّياً تقاوم هجمات الحواسيب الكمّية؛ وتوزيع المفاتيح الكمّي يكشف أي تنصّت</div>
+        <div class="x">الجاذبية ترى الكربون وهو يتحوّل إلى صخر</div><div class="ok">الجاذبية ترى الكتلة تصل وتبقى؛ والكيمياء تؤكد تحوّلها إلى صخر</div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap next-page"><a class="btn" href="lab.html">التالي: مختبر المحاكاة ←</a></div>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="index.html" style="margin-bottom:10px"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="#1C2B38" stroke="#7EDDD3" stroke-width="1.5"/><path d="M8 12h16M16 7v18M10 12l-3 7h6zM22 12l-3 7h6z" stroke="#7EDDD3" stroke-width="1.6" fill="none" stroke-linejoin="round"/><circle cx="16" cy="7" r="2.2" fill="#9B6BFF"/></svg>كيو-ميزان</a>
+      <p>مستشعرات كمّية تزن ثاني أكسيد الكربون الذي يتحوّل إلى صخر في جبال الفجيرة. مقترح مقدَّم إلى تحدّي الكمّ ضمن برنامج المدارس لمجلس أبحاث التكنولوجيا المتطورة 2026–2027.</p>
+      <p>مدارس التكنولوجيا التطبيقية – أبوظبي بنين · المعلّم: نضال صالح</p>
+    </div>
+    <div><h4>استكشف</h4><ul><li><a href="index.html">الرئيسية</a></li><li><a href="challenge.html">التحدي</a></li><li><a href="technology.html">التقنية</a></li><li><a href="lab.html">مختبر المحاكاة</a></li><li><a href="impact.html">الأثر</a></li><li><a href="research.html">الأبحاث</a></li><li><a href="team.html">الفريق</a></li></ul></div>
+    <div><h4>روابط</h4><ul><li><a href="../assets/docs/Q-MIZAN_Proposal.pptx">تحميل المقترح (‎.pptx، بالإنجليزية)</a></li><li><a href="https://atrcschoolprogram.ae">برنامج المدارس – مجلس أبحاث التكنولوجيا المتطورة</a></li><li><a href="https://www.tii.ae/quantum">مركز أبحاث الكمّ – معهد الابتكار التكنولوجي</a></li></ul></div>
+  </div>
+</footer>
+<script src="../assets/js/main.js"></script>
+
+</body>
+</html>

@@ -18,7 +18,15 @@
     warn: css.getPropertyValue('--warn').trim(), muted: css.getPropertyValue('--muted').trim(),
     line: css.getPropertyValue('--line').trim(), ink: css.getPropertyValue('--ink').trim()
   };
-  var steps = [
+  var AR = document.documentElement.lang === 'ar';
+  function T(en, ar) { return AR ? ar : en; }
+  var steps = AR ? [
+    { t: 'التبريد', d: 'تُبطئ ستّة أشعة ليزر سحابة من ذرّات الروبيديوم حتى تصبح على بُعد أجزاء من المليون من الدرجة فوق الصفر المطلق. الذرّات الباردة تتحرّك ببطء، فنستطيع تتبّعها وهي تسقط.' },
+    { t: 'الانقسام', d: 'تعطي نبضة ليزر كل ذرّة دفعة صغيرة، لكن «نصفها» فقط: تصبح الذرّة في حالة تراكب بين مسارين، أحدهما أسرع قليلاً من الآخر. وتبقى ذرّة واحدة.' },
+    { t: 'السقوط', d: 'يسقط المساران سقوطاً حراً لمدة عُشر ثانية تقريباً. ثم تبدّل نبضة ثانية المسارين، فيتّجهان نحو بعضهما من جديد.' },
+    { t: 'التداخل', d: 'تعيد نبضة ثالثة دمج المسارين. ومثل الأمواج التي تلتقي في الماء، يتداخلان. وتعتمد النتيجة على فرق الطور، الذي يعتمد على قوة سحب الجاذبية أثناء السقوط.' },
+    { t: 'القراءة', d: 'يعدّ الكاشف الذرّات في كل حالة. وبتكرار ذلك كل ثانية نحصل على شدّة الجاذبية بدقة تقارب جزءاً من مليار من g، من دون نوابض تنحرف ببطء مع الزمن.' }
+  ] : [
     { t: 'Cool', d: 'Six laser beams slow a cloud of rubidium atoms until it is a few millionths of a degree above absolute zero. Cold atoms move slowly, so we can follow them as they fall.' },
     { t: 'Split', d: 'A laser pulse gives each atom a tiny kick, but only “half” of it: the atom is now in a superposition of two paths, one moving slightly faster than the other. It is still one atom.' },
     { t: 'Fall', d: 'Both paths fall freely for about a tenth of a second. A second pulse swaps them over, so they head back towards each other.' },
@@ -57,13 +65,13 @@
     // chamber
     ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(cx - 110, 20, 220, h - 40, 26); ctx.stroke();
     ctx.fillStyle = C.muted; ctx.font = '12px "IBM Plex Sans", Arial'; ctx.textAlign = 'left';
-    ctx.fillText('vacuum chamber', cx + 118, 36);
+    ctx.fillText(T('vacuum chamber', 'حجرة مفرغة'), cx + 118, 36);
     // pulse bands
     [y1, y2, y3].forEach(function (y, k) {
       var active = (cur === 1 && k === 0) || (cur === 2 && k === 1) || (cur >= 3 && k === 2);
       ctx.fillStyle = active ? 'rgba(126,221,211,0.45)' : 'rgba(126,221,211,0.12)';
       ctx.fillRect(cx - 108, y - 6, 216, 12);
-      ctx.fillStyle = C.muted; ctx.textAlign = 'right'; ctx.fillText('pulse ' + (k + 1), cx - 118, y + 4);
+      ctx.fillStyle = C.muted; ctx.textAlign = 'right'; ctx.fillText(T('pulse ', 'نبضة ') + (k + 1), cx - 118, y + 4);
     });
     ctx.textAlign = 'left';
     // paths drawn so far
@@ -105,8 +113,8 @@
       ctx.fillStyle = C.warn; ctx.beginPath(); ctx.roundRect(cx - 50, h - 64, 100, 26, 6); ctx.fill();
       var frac = 0.62 + 0.02 * Math.sin(now / 500);
       ctx.fillStyle = C.ink; ctx.font = '600 13px "IBM Plex Sans", Arial'; ctx.textAlign = 'center';
-      ctx.fillText('state A ' + Math.round(frac * 100) + '%  ·  state B ' + Math.round((1 - frac) * 100) + '%', cx, h - 76);
-      ctx.fillStyle = '#1B1407'; ctx.fillText('detector', cx, h - 46);
+      ctx.fillText(T('state A ', 'الحالة أ ') + Math.round(frac * 100) + '%  ·  ' + T('state B ', 'الحالة ب ') + Math.round((1 - frac) * 100) + '%', cx, h - 76);
+      ctx.fillStyle = '#1B1407'; ctx.fillText(T('detector', 'الكاشف'), cx, h - 46);
     }
     // gravity arrow
     ctx.strokeStyle = C.muted; ctx.fillStyle = C.muted; ctx.lineWidth = 2;

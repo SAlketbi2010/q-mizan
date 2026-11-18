@@ -6,6 +6,8 @@ Our project website for the ATRC School Program Quantum Challenge 2026–27 (Mod
 
 In Fujairah, CO2 is dissolved in seawater and injected into peridotite rock, where it turns into solid carbonate. Every tonne has to be proven to stay locked away before it counts toward net zero or earns carbon credits. Q-MIZAN uses quantum gravimeters, sensors that use falling clouds of ultracold atoms, to measure the tiny extra pull of gravity as carbon builds up underground. Rising gravity shows carbon arriving; steady gravity shows it staying put. (Mizan, ميزان, means "scale" or "balance" in Arabic.)
 
+An Arabic version (right-to-left) is in the `ar/` folder; every page has a language switch.
+
 ## Pages
 
 | Page | What it covers |

@@ -4,11 +4,14 @@
 // 1 µGal = 1e-8 m/s².
 (function () {
   var G = 6.674e-11;
+  var AR = document.documentElement.lang === 'ar';
+  function T(en, ar) { return AR ? ar : en; }
+  var U = { t: T(' t', ' طن'), m: T(' m', ' م'), g: T(' µGal', ' ميكروغال') };
   var css = getComputedStyle(document.documentElement);
   function col(n) { return css.getPropertyValue(n).trim(); }
   var C = { teal: col('--teal'), violet: col('--violet'), sand: col('--sand'), warn: col('--warn'), bad: col('--bad'), muted: col('--muted'), line: col('--line'), ink: col('--ink'), panel: col('--panel') };
   function dgPoint(tonnes, r) { return G * tonnes * 1000 / (r * r) * 1e8; }
-  function fmtT(t) { return Math.round(t).toLocaleString('en-US') + ' t'; }
+  function fmtT(t) { return Math.round(t).toLocaleString('en-US') + U.t; }
   function fmtG(v) { var a = Math.abs(v); return a >= 10 ? v.toFixed(0) : a >= 1 ? v.toFixed(1) : a >= 0.01 ? v.toFixed(2) : v.toExponential(1); }
   function setup(cv) {
     var dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
@@ -29,20 +32,20 @@
   var mass = $('mass'), dist = $('dist'), lim = $('lim'), exactT = 25000;
   function drawA() {
     var t = exactT || Math.pow(10, +mass.value), r = +dist.value, L = +lim.value, v = dgPoint(t, r);
-    $('massOut').textContent = fmtT(t); $('distOut').textContent = r + ' m'; $('limOut').textContent = L + ' µGal';
-    $('dgOut').textContent = '+' + fmtG(v) + ' µGal';
+    $('massOut').textContent = fmtT(t); $('distOut').textContent = r + U.m; $('limOut').textContent = L + U.g;
+    $('dgOut').textContent = '+' + fmtG(v) + U.g;
     var ratio = v / L;
     $('verdictA').innerHTML = ratio >= 1
-      ? '<span class="pill ok">Detectable: ' + (ratio >= 10 ? Math.round(ratio) : ratio.toFixed(1)) + '× the limit</span>'
-      : '<span class="pill no">Too small: ' + (ratio < 0.01 ? 'under 1%' : Math.round(ratio * 100) + '%') + ' of the limit</span>';
+      ? '<span class="pill ok">' + T('Detectable: ', 'يمكن رصده: ') + (ratio >= 10 ? Math.round(ratio) : ratio.toFixed(1)) + T('× the limit', ' أضعاف الحدّ') + '</span>'
+      : '<span class="pill no">' + T('Too small: ', 'أصغر من اللازم: ') + (ratio < 0.01 ? T('under 1%', 'أقل من 1%') : Math.round(ratio * 100) + '%') + T(' of the limit', ' من الحدّ') + '</span>';
     var rMax = Math.sqrt(G * t * 1000 * 1e8 / L);
-    $('reachA').textContent = 'With this much carbon, a sensor up to ' + (rMax >= 1000 ? (rMax / 1000).toFixed(1) + ' km' : Math.round(rMax) + ' m') + ' away could still see it.';
+    $('reachA').textContent = T('With this much carbon, a sensor up to ', 'بهذه الكمية من الكربون، يستطيع مستشعر على بُعد يصل إلى ') + (rMax >= 1000 ? (rMax / 1000).toFixed(1) + T(' km', ' كم') : Math.round(rMax) + U.m) + T(' away could still see it.', ' أن يرصدها.');
     var c = setup($('chartA')), ctx = c.ctx, pad = { l: 58, r: 26, t: 14, b: 46 }, lo = -3, hi = 3;
     function xf(x) { return pad.l + (x - 20) / (800 - 20) * (c.w - pad.l - pad.r); }
     function yf(g) { var lg = Math.log10(Math.max(g, 1e-9)); lg = Math.min(hi, Math.max(lo, lg)); return pad.t + (hi - lg) / (hi - lo) * (c.h - pad.t - pad.b); }
-    axes(c, pad, [20, 200, 400, 600, 800].map(function (v) { return { v: v, label: v + ' m' }; }),
+    axes(c, pad, [20, 200, 400, 600, 800].map(function (v) { return { v: v, label: v + U.m }; }),
       [0.001, 0.01, 0.1, 1, 10, 100, 1000].map(function (g) { return { v: g, label: String(g) }; }),
-      'Distance between carbon and sensor', 'µGal (log scale)', xf, yf);
+      T('Distance between carbon and sensor', 'المسافة بين الكربون والمستشعر'), T('µGal (log scale)', 'ميكروغال (مقياس لوغاريتمي)'), xf, yf);
     ctx.strokeStyle = C.warn; ctx.setLineDash([6, 5]); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(pad.l, yf(L)); ctx.lineTo(c.w - pad.r, yf(L)); ctx.stroke(); ctx.setLineDash([]);
     ctx.beginPath(); for (var x = 20; x <= 800; x += 5) { x === 20 ? ctx.moveTo(xf(x), yf(dgPoint(t, x))) : ctx.lineTo(xf(x), yf(dgPoint(t, x))); }
     ctx.lineTo(xf(800), c.h - pad.b); ctx.lineTo(xf(20), c.h - pad.b); ctx.closePath(); ctx.fillStyle = 'rgba(126,221,211,0.10)'; ctx.fill();
@@ -68,7 +71,7 @@
   function gauss() { var u = rnd() || 1e-9, v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); }
   function drawB() {
     var R = +rate.value, r = +distB.value, s = +noise.value;
-    $('rateOut').textContent = R + ' t/day'; $('distBOut').textContent = r + ' m'; $('noiseOut').textContent = '±' + s + ' µGal';
+    $('rateOut').textContent = R + T(' t/day', ' طن/يوم'); $('distBOut').textContent = r + U.m; $('noiseOut').textContent = '±' + s + U.g;
     var months = 36, perMonth = R * 30.4, truth = [], meas = [], s0 = seed;
     for (var m = 0; m <= months; m++) {
       var stored = Math.min(m, 12) * perMonth;
@@ -83,18 +86,18 @@
     function yf(g) { return pad.t + (ymax - g) / (ymax - ymin) * (c.h - pad.t - pad.b); }
     var step = ymax > 200 ? 100 : ymax > 80 ? 20 : ymax > 30 ? 10 : 5, yt = [];
     for (var g = Math.ceil(ymin / step) * step; g <= ymax; g += step) yt.push({ v: g, label: String(g) });
-    axes(c, pad, [0, 12, 24, 36].map(function (v) { return { v: v, label: 'month ' + v }; }), yt, 'Time', 'Gravity change (µGal)', xf, yf);
+    axes(c, pad, [0, 12, 24, 36].map(function (v) { return { v: v, label: T('month ', 'الشهر ') + v }; }), yt, T('Time', 'الزمن'), T('Gravity change (µGal)', 'تغيّر الجاذبية (ميكروغال)'), xf, yf);
     ctx.fillStyle = 'rgba(126,221,211,0.06)'; ctx.fillRect(xf(0), pad.t, xf(12) - xf(0), c.h - pad.t - pad.b);
-    ctx.fillStyle = C.muted; ctx.font = '12px "IBM Plex Sans", Arial'; ctx.textAlign = 'left'; ctx.fillText('injecting', xf(0) + 6, pad.t + 14);
+    ctx.fillStyle = C.muted; ctx.font = '12px "IBM Plex Sans", Arial'; ctx.textAlign = 'left'; ctx.fillText(T('injecting', 'فترة الحقن'), xf(0) + 6, pad.t + 14);
     ctx.strokeStyle = C.muted; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.moveTo(xf(12), pad.t); ctx.lineTo(xf(12), c.h - pad.b); ctx.stroke(); ctx.setLineDash([]);
     ctx.beginPath(); truth.forEach(function (g, m) { m ? ctx.lineTo(xf(m), yf(g)) : ctx.moveTo(xf(m), yf(g)); }); ctx.strokeStyle = C.teal; ctx.lineWidth = 2.5; ctx.stroke();
     ctx.fillStyle = C.sand; meas.forEach(function (g, m) { ctx.beginPath(); ctx.arc(xf(m), yf(g), 3.8, 0, 7); ctx.fill(); });
     function mean(a, b) { var t = 0; for (var i = a; i <= b; i++) t += meas[i]; return t / (b - a + 1); }
     var early = mean(13, 18), late = mean(31, 36), se = s * Math.sqrt(2 / 6), peak = truth[12];
     var tonnes = Math.round(12 * perMonth).toLocaleString('en-US');
-    if (peak < 2 * s) { $('verdictB').innerHTML = '<span class="pill no">Signal lost in the noise</span>'; $('noteB').textContent = tonnes + ' t injected gives only +' + fmtG(peak) + ' µGal at ' + r + ' m. Move the sensor closer or inject more.'; }
-    else if (early - late > 3 * se) { $('verdictB').innerHTML = '<span class="pill warn">Gravity falling: carbon may be moving</span>'; $('noteB').textContent = 'Readings dropped by ' + fmtG(early - late) + ' µGal after injection stopped. Time to check the monitoring wells.'; }
-    else { $('verdictB').innerHTML = '<span class="pill ok">Gravity steady: carbon is staying put</span>'; $('noteB').textContent = tonnes + ' t injected in year one gives about +' + fmtG(peak) + ' µGal at ' + r + ' m, and the readings stay level afterwards.'; }
+    if (peak < 2 * s) { $('verdictB').innerHTML = '<span class="pill no">' + T('Signal lost in the noise', 'الإشارة ضائعة في الضجيج') + '</span>'; $('noteB').textContent = T(tonnes + ' t injected gives only +' + fmtG(peak) + ' µGal at ' + r + ' m. Move the sensor closer or inject more.', 'حقن ' + tonnes + ' طن يعطي ' + fmtG(peak) + '+ ميكروغال فقط على بُعد ' + r + ' م. قرّب المستشعر أو زِد كمية الحقن.'); }
+    else if (early - late > 3 * se) { $('verdictB').innerHTML = '<span class="pill warn">' + T('Gravity falling: carbon may be moving', 'الجاذبية تنخفض: قد يكون الكربون يتحرّك') + '</span>'; $('noteB').textContent = T('Readings dropped by ' + fmtG(early - late) + ' µGal after injection stopped. Time to check the monitoring wells.', 'انخفضت القراءات بمقدار ' + fmtG(early - late) + ' ميكروغال بعد توقّف الحقن. حان وقت فحص آبار المراقبة.'); }
+    else { $('verdictB').innerHTML = '<span class="pill ok">' + T('Gravity steady: carbon is staying put', 'الجاذبية ثابتة: الكربون باقٍ في مكانه') + '</span>'; $('noteB').textContent = T(tonnes + ' t injected in year one gives about +' + fmtG(peak) + ' µGal at ' + r + ' m, and the readings stay level afterwards.', 'حقن ' + tonnes + ' طن في السنة الأولى يعطي نحو ' + fmtG(peak) + '+ ميكروغال على بُعد ' + r + ' م، وتبقى القراءات ثابتة بعد ذلك.'); }
   }
   if (rate) {
     [rate, distB, noise].forEach(function (e) { e.addEventListener('input', drawB); });
@@ -137,7 +140,7 @@
   function mix(a, b, f) { return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
   function drawC() {
     var yrs = +years.value, z = +depth.value, L = +limC.value;
-    $('yearsOut').textContent = yrs + (yrs === 1 ? ' year' : ' years'); $('depthOut').textContent = z + ' m'; $('limCOut').textContent = L + ' µGal';
+    $('yearsOut').textContent = yrs + T(yrs === 1 ? ' year' : ' years', yrs === 1 ? ' سنة' : (yrs <= 10 ? ' سنوات' : ' سنة')); $('depthOut').textContent = z + U.m; $('limCOut').textContent = L + U.g;
     var dep = deposit(yrs), cv = $('chartC'), c = setup(cv), ctx = c.ctx, side = Math.min(c.w, c.h), ox = (c.w - side) / 2, oy = (c.h - side) / 2;
     var N = 60, cell = side / N, vals = [], vmax = 0;
     for (var j = 0; j < N; j++) for (var i = 0; i < N; i++) { var x = -HALF + (i + 0.5) * SIZE / N, y = HALF - (j + 0.5) * SIZE / N, v = gAt(dep, x, y, z); vals.push(v); if (v > vmax) vmax = v; }
@@ -160,10 +163,10 @@
     // wadi aquifer marker (east)
     ctx.fillStyle = 'rgba(63,167,214,0.35)'; ctx.fillRect(px(480), oy, side - (px(480) - ox), side);
     ctx.fillStyle = C.ink; ctx.font = '12px "IBM Plex Sans", Arial'; ctx.textAlign = 'center';
-    ctx.save(); ctx.translate(px(540), py(0)); ctx.rotate(-Math.PI / 2); ctx.fillText('fresh wadi groundwater', 0, 0); ctx.restore();
+    ctx.save(); ctx.translate(px(540), py(0)); ctx.rotate(-Math.PI / 2); ctx.fillText(T('fresh wadi groundwater', 'مياه جوفية عذبة في الوادي'), 0, 0); ctx.restore();
     // scale bar
     ctx.strokeStyle = C.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(px(-560), py(-560)); ctx.lineTo(px(-360), py(-560)); ctx.stroke();
-    ctx.textAlign = 'left'; ctx.fillText('200 m', px(-560), py(-560) - 6);
+    ctx.textAlign = 'left'; ctx.fillText('200' + U.m, px(-560), py(-560) - 6);
     // sensors
     var rows = '', seen = 0;
     sensors.forEach(function (s, n) {
@@ -171,13 +174,13 @@
       ctx.beginPath(); ctx.arc(px(s[0]), py(s[1]), 8, 0, 7); ctx.fillStyle = ok ? C.violet : 'rgba(155,107,255,0.25)'; ctx.fill();
       ctx.strokeStyle = C.ink; ctx.lineWidth = 1.5; ctx.stroke();
       ctx.fillStyle = C.ink; ctx.font = '600 11px "IBM Plex Sans", Arial'; ctx.textAlign = 'center'; ctx.fillText(String(n + 1), px(s[0]), py(s[1]) - 12);
-      rows += '<tr><td class="mono">S' + (n + 1) + '</td><td class="mono">' + Math.round(s[0]) + ', ' + Math.round(s[1]) + '</td><td class="mono">+' + fmtG(v) + '</td><td>' + (ok ? '<span class="yes">sees it</span>' : '<span class="no">below limit</span>') + '</td></tr>';
+      rows += '<tr><td class="mono">' + T('S', 'م') + (n + 1) + '</td><td class="mono"><span class="ltr">' + Math.round(s[0]) + ', ' + Math.round(s[1]) + '</span></td><td class="mono"><span class="ltr">+' + fmtG(v) + '</span></td><td>' + (ok ? '<span class="yes">' + T('sees it', 'يرصده') + '</span>' : '<span class="no">' + T('below limit', 'دون الحدّ') + '</span>') + '</td></tr>';
     });
     $('sensorRows').innerHTML = rows;
     var east = 0; dep.pts.forEach(function (q) { east += q[0]; }); east /= dep.pts.length;
-    $('verdictC').innerHTML = '<span class="pill ' + (seen >= 3 ? 'ok' : seen ? 'warn' : 'no') + '">' + seen + ' of ' + sensors.length + ' sensors see the carbon</span>' +
-      (drift && yrs > 5 ? ' <span class="pill warn">Carbon centre has moved ' + Math.round(east) + ' m east</span>' : '');
-    $('noteC').textContent = fmtT(dep.total) + ' stored after ' + yrs + (yrs === 1 ? ' year' : ' years') + '. Strongest signal on the sensor plane: +' + fmtG(vmax) + ' µGal. Click the map to add or remove a sensor.';
+    $('verdictC').innerHTML = '<span class="pill ' + (seen >= 3 ? 'ok' : seen ? 'warn' : 'no') + '">' + T(seen + ' of ' + sensors.length + ' sensors see the carbon', seen + ' من ' + sensors.length + ' مستشعرات ترصد الكربون') + '</span>' +
+      (drift && yrs > 5 ? ' <span class="pill warn">' + T('Carbon centre has moved ' + Math.round(east) + ' m east', 'انتقل مركز الكربون ' + Math.round(east) + ' م شرقاً') + '</span>' : '');
+    $('noteC').textContent = T(fmtT(dep.total) + ' stored after ' + yrs + (yrs === 1 ? ' year' : ' years') + '. Strongest signal on the sensor plane: +' + fmtG(vmax) + ' µGal. Click the map to add or remove a sensor.', 'تخزين ' + fmtT(dep.total) + ' بعد ' + yrs + (yrs === 1 ? ' سنة' : (yrs <= 10 ? ' سنوات' : ' سنة')) + '. أقوى إشارة على مستوى المستشعرات: ' + fmtG(vmax) + '+ ميكروغال. انقر على الخريطة لإضافة مستشعر أو إزالته.');
     cv._map = { px: px, py: py, ox: ox, oy: oy, side: side };
   }
   if (years) {
